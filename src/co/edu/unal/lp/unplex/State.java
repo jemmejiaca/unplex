@@ -1,6 +1,7 @@
-package con.edu.unal.lp.unplex;
+package co.edu.unal.lp.unplex;
 
 public class State {
+	
 	private String label;
 	private int index;
 	

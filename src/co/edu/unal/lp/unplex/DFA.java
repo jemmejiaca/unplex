@@ -1,4 +1,4 @@
-package con.edu.unal.lp.unplex;
+package co.edu.unal.lp.unplex;
 
 import java.util.List;
 import java.util.Map;
@@ -20,6 +20,10 @@ public class DFA {
 		this.transitionTable = transitionTable;
 	}
 	
+	public DFA() {
+		this(null, null, null, null);
+	}
+	
 	public boolean accept(String string) {
 		State currentState = states.get(0);
 		int index = 0;
@@ -39,4 +43,36 @@ public class DFA {
 		return transitionTable.get(state).get(index);
 	}
 
+	public List<Character> getAlphabet() {
+		return alphabet;
+	}
+
+	public void setAlphabet(List<Character> alphabet) {
+		this.alphabet = alphabet;
+	}
+
+	public List<State> getStates() {
+		return states;
+	}
+
+	public void setStates(List<State> states) {
+		this.states = states;
+	}
+
+	public List<State> getAcceptingStates() {
+		return acceptingStates;
+	}
+
+	public void setAcceptingStates(List<State> acceptingStates) {
+		this.acceptingStates = acceptingStates;
+	}
+
+	public Map<State, List<State>> getTransitionTable() {
+		return transitionTable;
+	}
+
+	public void setTransitionTable(Map<State, List<State>> transitionTable) {
+		this.transitionTable = transitionTable;
+	}
+	
 }

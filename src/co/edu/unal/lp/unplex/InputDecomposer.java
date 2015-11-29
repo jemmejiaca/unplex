@@ -1,4 +1,4 @@
-package con.edu.unal.lp.unplex;
+package co.edu.unal.lp.unplex;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
