@@ -124,7 +124,7 @@ public class NFA {
 				rowTransitionTable.get(T).add(U);
 			}
 		}
-		System.out.println(rowTransitionTable);
+		//System.out.println(rowTransitionTable);
 		return dfa;
 	}
 

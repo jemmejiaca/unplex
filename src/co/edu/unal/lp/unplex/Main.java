@@ -15,16 +15,17 @@ public class Main {
 	private final static char PROMPT_CHAR = '>';
 	
 	private static InputDecomposer inputDecomposer;
+	private static OutputComposer outputComposer;
 	private static Scanner keyboard = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		
-		//inputDecomposer = new InputDecomposer(promptFile());
-		//StringBuilder[] sourceSections = inputDecomposer.parseSource();
+		inputDecomposer = new InputDecomposer(promptFile());
+		StringBuilder[] sourceSections = inputDecomposer.parseSource();
 		//System.out.println(sourceSections[InputDecomposer.JAVA_CODE_SECTION].toString());
 		
 		//**********Testing a DFA****[PLEASE DELETE ME...]
-		List<Character> testAlphabet = Arrays.asList('a', 'b');
+		List<Character> spanishAlphabet = Arrays.asList('a', 'b', 'c', 'd', 'f', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z');
 		List<State> testStates = Arrays.asList(new State(0), new State(1), new State(2), new State(3));
 		List<State> testFinalStates = Arrays.asList(testStates.get(3));
 		Map<State, List<State>> testTransitionTable = new HashMap<State, List<State>>(){{
@@ -34,8 +35,8 @@ public class Main {
 			/*q2*/put(testStates.get(2), Arrays.asList(testStates.get(1), testStates.get(3)));
 			/*q3*/put(testStates.get(3), Arrays.asList(testStates.get(1), testStates.get(0)));
 		}};
-		DFA testdfa = new DFA(testAlphabet, testStates, testFinalStates, testTransitionTable);
-		System.out.println(testdfa.accept("bbbab"));
+		DFA testdfa = new DFA(spanishAlphabet, testStates, testFinalStates, testTransitionTable);
+		System.out.println(testdfa.accept("bbbabb"));
 		
 		//**********Testing a NFA****[PLEASE DELETE ME...]
 		ArrayList<Character> _testAlphabet = new ArrayList<>(Arrays.asList('a', 'b'));
@@ -103,12 +104,19 @@ public class Main {
 		NFA testnfa = new NFA(_testAlphabet, _testStates, _testFinalStates, _testTransitionTable);
 		Set<State> atestSet = new HashSet<>(Arrays.asList(_testStates.get(3), _testStates.get(8)));
 		Set<State> lambdaClo = testnfa.lambdaClosure(atestSet);
-		System.out.println(lambdaClo);
+		//System.out.println(lambdaClo);
 		State s0 = _testStates.get(0);
-		System.out.println(testnfa.lambdaClosure(s0));
+		//System.out.println(testnfa.lambdaClosure(s0));
 		DFA converted = testnfa.convertToDFA();
+		String[] m = {""};
 		
-				
+		String sentence = sourceSections[InputDecomposer.RULES_SECTION].toString();
+		outputComposer = new OutputComposer(sentence);
+		
+		Token[] result = outputComposer.getTokens();
+		for (Token t : result)
+			System.out.println(t);
+		outputComposer.writeFile();
 		
 	}
 	
